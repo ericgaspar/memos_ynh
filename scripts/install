@@ -37,6 +37,7 @@ ynh_exec_warn_less sudo -u $app env $ynh_node_load_PATH yarn
 popd
 
 mv $install_dir/web/dist  $install_dir/server/dist
+
 pushd $install_dir/server/dist
 	ynh_exec_warn_less ynh_exec_as $app CGO_ENABLED=0 $ynh_go build -o $install_dir/main.go
 popd
