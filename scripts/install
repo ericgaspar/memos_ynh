@@ -39,6 +39,8 @@ pushd $install_dir/server/dist
 	ynh_exec_warn_less ynh_exec_as $app CGO_ENABLED=0 $ynh_go build -o $install_dir/main.go
 popd
 
+ynh_remove_go
+
 chown -R $app:www-data "$install_dir"
 chmod +x "$install_dir/memos"
 
