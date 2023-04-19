@@ -2,8 +2,8 @@ packaging_format = 2
 
 id = "memos"
 name = "Memos"
-description.en = "Explain in *a few (10~15) words* the purpose of the app or what it actually does (it is meant to give a rough idea to users browsing a catalog of 100+ apps)"
-description.fr = "Expliquez en *quelques* (10~15) mots l'utilité de l'app ou ce qu'elle fait (l'objectif est de donner une idée grossière pour des utilisateurs qui naviguent dans un catalogue de 100+ apps)"
+description.en = "Lightweight, self-hosted memo hub"
+description.fr = "Lightweight, self-hosted memo hub"
 
 version = "0.12.2~ynh1"
 
@@ -12,7 +12,6 @@ maintainers = ["johndoe"]
 [upstream]
 license = "MIT"
 website = "https://usememos.com/"
-demo = "https://demo.example.com"
 admindoc = "https://usememos.com/docs"
 code = "https://github.com/usememos/memos"
 
@@ -59,7 +58,7 @@ ram.runtime = "50M"
     [resources.ports]
 
     [resources.apt]
-    packages = ""
+    packages = "sqlite3"
 
     extras.yarn.repo = "deb https://dl.yarnpkg.com/debian/ stable main"
     extras.yarn.key = "https://dl.yarnpkg.com/debian/pubkey.gpg"
