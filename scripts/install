@@ -16,6 +16,8 @@ ynh_script_progression --message="Installing dependencies..." --weight=1
 
 # Install Nodejs
 ynh_exec_warn_less ynh_install_nodejs --nodejs_version=$nodejs_version
+ynh_exec_warn_less ynh_install_go --go_version=$go_version
+ynh_use_go
 
 #=================================================
 # APP "BUILD" (DEPLOYING SOURCES, VENV, COMPILING ETC)
@@ -27,7 +29,18 @@ ynh_script_progression --message="Setting up source files..." --weight=1
 # Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source --dest_dir="$install_dir"
 
+pushd $install_dir/web
+ynh_exec_warn_less sudo -u $app env $ynh_node_load_PATH yarn
+	ynh_exec_warn_less sudo -u $app env $ynh_node_load_PATH yarn build
+popd
+
+mv $install_dir/web/dist  $install_dir/server/dist
+pushd $install_dir/server/dist
+	ynh_exec_warn_less ynh_exec_as $app CGO_ENABLED=0 $ynh_go build -o $install_dir/main.go
+popd
+
 chown -R $app:www-data "$install_dir"
+chmod +x "$install_dir/memos"
 
 #=================================================
 # SYSTEM CONFIGURATION
