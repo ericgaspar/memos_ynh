@@ -11,6 +11,7 @@ maintainers = ["johndoe"]
 
 [upstream]
 license = "MIT"
+demo = "https://demo.usememos.com"
 website = "https://usememos.com/"
 admindoc = "https://usememos.com/docs"
 code = "https://github.com/usememos/memos"
