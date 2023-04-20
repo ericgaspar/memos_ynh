@@ -34,7 +34,7 @@ chown -R $app:www-data "$install_dir"
 #cp $install_dir/web/package.json $install_dir
 #cp $install_dir/web/pnpm-lock.yaml $install_dir
 
-mv -r $install_dir/web/ $install_dir
+mv $install_dir/web/ $install_dir
 
 pushd $install_dir
 	ynh_exec_warn_less sudo -u $app env $ynh_node_load_PATH npm install -g pnpm && pnpm i --frozen-lockfile
