@@ -31,12 +31,18 @@ ynh_setup_source --dest_dir="$install_dir"
 
 chown -R $app:www-data "$install_dir"
 
-pushd $install_dir/web
-ynh_exec_warn_less sudo -u $app env $ynh_node_load_PATH yarn
+mkdir $install_dir/frontend-build
+
+mv $install_dir/web/package.json $install_dir/frontend-build/
+mv $install_dir/web/yarn.lock $install_dir/frontend-build/
+mv $install_dir/web $install_dir/frontend-build	
+
+pushd $install_dir/frontend-build/
+	ynh_exec_warn_less sudo -u $app env $ynh_node_load_PATH yarn
 	ynh_exec_warn_less sudo -u $app env $ynh_node_load_PATH yarn build
 popd
 
-mv $install_dir/web/dist  $install_dir/server/dist
+mv $install_dir/frontend-build/dist $install_dir/server/dist
 
 pushd $install_dir
 	ynh_exec_warn_less ynh_exec_as $app CGO_ENABLED=1 $ynh_go build -o $install_dir/memos ./main.go
