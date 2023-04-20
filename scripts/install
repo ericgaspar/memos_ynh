@@ -31,8 +31,8 @@ ynh_setup_source --dest_dir="$install_dir"
 
 chown -R $app:www-data "$install_dir"
 
-#cp $install_dir/web/package.json $install_dir
-#cp $install_dir/web/pnpm-lock.yaml $install_dir
+mv $install_dir/web/package.json $install_dir
+mv $install_dir/web/pnpm-lock.yaml $install_dir
 
 mv $install_dir/web/ ..
 
